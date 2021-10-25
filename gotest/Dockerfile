@@ -3,7 +3,7 @@
 #    docker run --rm -it -v $REPO_ROOT:/module -v modcache:/go/pkg gotest
 #
 FROM golang:1.17-alpine
-RUN apk add build-base git
+RUN apk add build-base git linux-headers
 ENV GOCACHE=/build/cache
 VOLUME /go/pkg      # preserve the module cache
 VOLUME /build/cache # preserve the build cache
