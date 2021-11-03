@@ -4,6 +4,7 @@ RUN apk add build-base git
 RUN go install -tags ${TAGS} github.com/creachadair/ffs/cmd/blobd@latest
 
 FROM alpine:latest AS run
+LABEL org.opencontainers.image.source=https://github.com/creachadair/docker-images
 VOLUME /data
 WORKDIR /data
 COPY --from=build /go/bin/blobd /usr/local/bin
