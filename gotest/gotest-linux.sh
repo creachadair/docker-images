@@ -7,8 +7,8 @@ set -euo pipefail
 readonly root="$(git rev-parse --show-toplevel 2>/dev/null || pwd)"
 docker run --rm -it \
        --volume "$root":/module \
-       --volume modcache:/go/pkg \
-       --volume buildcache:/build/cache \
+       --volume go-modcache:/go/pkg \
+       --volume go-buildcache:/build/cache \
        --entrypoint go \
        ghcr.io/creachadair/gotest -- \
        test "$@"
