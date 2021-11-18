@@ -14,7 +14,7 @@ IMGNAME := ghcr.io/creachadair/blobd
 
 # Build an image containing the blobd binary.
 build:
-	docker build -t $(IMGNAME) --build-arg TAGS=$(STORES) .
+	docker buildx build -t $(IMGNAME) --build-arg TAGS=$(STORES) .
 
 # Start a container running blobd with the given settings.
 # The service is exported to the host under the same port.

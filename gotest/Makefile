@@ -1,4 +1,4 @@
 IMGTAG := ghcr.io/creachadair/gotest
 
 build:
-	docker build -t $(IMGTAG) .
+	docker buildx build -t $(IMGTAG) .
