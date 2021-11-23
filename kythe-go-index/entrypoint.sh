@@ -2,6 +2,8 @@
 set -euo pipefail
 
 readonly goroot="$(go env GOROOT)"
+readonly index="/data/index-data.riegeli"
+readonly table="/data/index-table"
 
 find . -type f -name go.mod -print | while read -r mod ; do
     echo "-- $mod" 1>&2
@@ -17,7 +19,9 @@ find . -type f -name go.mod -print | while read -r mod ; do
     popd
 done
 
+
 find /data -type f -name '*.kzip' -print \
     | xargs -t go_indexer -code \
     | entrystream -unique -write_format riegeli \
-    > /data/index-data.riegeli
+    > "$index"
+write_tables --entries "$index" --out "table"
