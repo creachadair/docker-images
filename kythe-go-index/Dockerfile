@@ -30,6 +30,7 @@ COPY --from=install /usr/local/kythe/ /usr/local/kythe
 COPY ./entrypoint.sh /usr/bin/
 ENV KYTHE_DIR=/usr/local/kythe
 ENV PATH="${PATH}:${KYTHE_DIR}/bin"
+EXPOSE 8080
 VOLUME /code
 WORKDIR /code
 VOLUME /data
