@@ -19,9 +19,13 @@ find . -type f -name go.mod -print | while read -r mod ; do
     popd
 done
 
-
+echo "-- Running indexer..." 1>&2
 find /data -type f -name '*.kzip' -print \
     | xargs -t go_indexer -code \
     | entrystream -unique -write_format riegeli \
     > "$index"
+
+echo "-- Building index table..." 1>&2
 write_tables --entries "$index" --out "table"
+
+echo "<done>" 1>&2
