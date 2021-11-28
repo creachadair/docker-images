@@ -48,7 +48,7 @@ start:
 	docker run --detach --volume $(DATAVOL):/data \
 		--name $(CNAME) \
 		--publish $(NETWORK):$(PORT):$(PORT) \
-		$(IMGNAME) \
+		$(IMGNAME):$(IMGVERS) \
 		-store $(STORE) -listen :$(PORT)
 
 stop:
