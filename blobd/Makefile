@@ -25,6 +25,12 @@ images:
 	@make standard
 	@make omnibus
 
+# Build and push images to the registry.
+push-images: images
+	@for vs in omnibus standard minimal ; do \
+	   docker image push "$(IMGNAME):$$vs" ; \
+	done
+
 minimal: IMGVERS=minimal
 minimal: STORES=file,memory
 minimal: build
