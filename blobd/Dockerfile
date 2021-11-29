@@ -1,7 +1,7 @@
 FROM golang:1.17-alpine AS build
 ARG TAGS
 RUN apk add build-base git
-RUN go install -tags ${TAGS} github.com/creachadair/ffs/cmd/blobd@latest
+RUN go install -tags ${TAGS} github.com/creachadair/ffstools/blobd@latest
 
 FROM alpine:latest AS run
 LABEL org.opencontainers.image.source=https://github.com/creachadair/docker-images
