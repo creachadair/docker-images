@@ -1,5 +1,5 @@
 IMGTAG := ghcr.io/creachadair/gotest
-GOVERSION := 1.17
+GOVERSION := 1.18
 
 build:
 	docker buildx build -t $(IMGTAG) --build-arg=GOVERSION=$(GOVERSION) .
