@@ -1,4 +1,4 @@
-FROM golang:1.17-alpine AS build
+FROM golang:1.18-alpine AS build
 ARG TAGS
 RUN apk add build-base git
 RUN go install -tags ${TAGS} github.com/creachadair/ffstools/blobd@latest
