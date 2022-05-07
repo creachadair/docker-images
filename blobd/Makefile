@@ -3,6 +3,7 @@ DATAVOL ?= blobdata
 NETWORK ?= 127.0.0.1
 CNAME   ?= blobd
 STORES  ?= badger,gcs,s3
+PROXY   ?= $(GOPROXY)
 
 # These settings control the container started by "make start".
 STORE   ?= badger:blobdata.db
@@ -15,7 +16,8 @@ IMGVERS := latest
 
 # Build an image containing the blobd binary.
 build:
-	docker buildx build -t $(IMGNAME):$(IMGVERS) --build-arg TAGS=$(STORES) .
+	docker buildx build -t $(IMGNAME):$(IMGVERS) \
+	  --build-arg TAGS=$(STORES) --build-arg PROXY=$(PROXY) .
 
 # Build image variations. Note we have to call make explicitly for each of
 # these, since only one set of target-specific settings will be applied to a

@@ -1,7 +1,7 @@
 FROM golang:1.18-alpine AS build
-ARG TAGS
+ARG PROXY TAGS
 RUN apk add build-base git
-RUN go install -tags ${TAGS} github.com/creachadair/ffstools/blobd@latest
+RUN GOPROXY=${PROXY} go install -tags ${TAGS} github.com/creachadair/ffstools/blobd@latest
 
 FROM alpine:latest AS run
 LABEL org.opencontainers.image.source=https://github.com/creachadair/docker-images
