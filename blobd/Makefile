@@ -4,6 +4,7 @@ NETWORK ?= 127.0.0.1
 CNAME   ?= blobd
 STORES  ?= badger,gcs,s3
 PROXY   ?= $(GOPROXY)
+DESC    ?= "Blob storage server"
 
 # These settings control the container started by "make start".
 STORE   ?= badger:blobdata.db
@@ -17,7 +18,10 @@ IMGVERS := latest
 # Build an image containing the blobd binary.
 build:
 	docker buildx build -t $(IMGNAME):$(IMGVERS) \
-	  --build-arg TAGS=$(STORES) --build-arg PROXY=$(PROXY) .
+	  --build-arg TAGS=$(STORES) \
+	  --build-arg PROXY=$(PROXY) \
+	  --build-arg DESC=$(DESC) \
+	  .
 
 # Build image variations. Note we have to call make explicitly for each of
 # these, since only one set of target-specific settings will be applied to a
@@ -35,13 +39,16 @@ push-images: images
 
 minimal: IMGVERS=minimal
 minimal: STORES=file,memory
+minimal: DESC='Blob storage server with minimal baseline file and in-memory implementations'
 minimal: build
 
 standard: IMGVERS=standard
+standard: DESC='Blob storage server with BadgerDB, GCS, and S3 implementations'
 standard: build
 
 omnibus: IMGVERS=omnibus
 omnibus: STORES=all
+omnibus: DESC='Blob storage server with all supported storage implementations'
 omnibus: build
 
 # Start a container running blobd with the given settings.
