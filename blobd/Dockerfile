@@ -1,4 +1,4 @@
-FROM golang:1.19-alpine AS build
+FROM golang:1.20-alpine AS build
 ARG PROXY TAGS
 RUN apk add build-base git
 RUN GOPROXY=${PROXY} go install -tags ${TAGS} github.com/creachadair/ffstools/blobd@latest

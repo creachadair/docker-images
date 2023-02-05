@@ -1,13 +1,13 @@
 # These settings control the image built by "make build".
-DATAVOL ?= blobdata
+DATAVOL ?= blobd-data
 NETWORK ?= 127.0.0.1
 CNAME   ?= blobd
-STORES  ?= badger,gcs,s3
+STORES  ?= pebble,gcs,s3
 PROXY   ?= $(GOPROXY)
 DESC    ?= "Blob storage server"
 
 # These settings control the container started by "make start".
-STORE   ?= badger:blobdata.db
+STORE   ?= pebble:data.db
 PORT    ?= 19741
 
 IMGNAME := ghcr.io/creachadair/blobd
