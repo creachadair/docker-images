@@ -43,7 +43,7 @@ minimal: DESC='Blob storage server with minimal baseline file and in-memory impl
 minimal: build
 
 standard: IMGVERS=standard
-standard: DESC='Blob storage server with BadgerDB, GCS, and S3 implementations'
+standard: DESC='Blob storage server with PebbleDB, GCS, and S3 implementations'
 standard: build
 
 omnibus: IMGVERS=omnibus
