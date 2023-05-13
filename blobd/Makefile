@@ -2,12 +2,12 @@
 DATAVOL ?= blobd-data
 NETWORK ?= 127.0.0.1
 CNAME   ?= blobd
-STORES  ?= pebble,gcs,s3
+STORES  ?= badger,gcs,s3
 PROXY   ?= $(GOPROXY)
 DESC    ?= "Blob storage server"
 
 # These settings control the container started by "make start".
-STORE   ?= pebble:data.db
+STORE   ?= badger:data.db
 PORT    ?= 19741
 
 IMGNAME := ghcr.io/creachadair/blobd
@@ -43,7 +43,7 @@ minimal: DESC='Blob storage server with minimal baseline file and in-memory impl
 minimal: build
 
 standard: IMGVERS=standard
-standard: DESC='Blob storage server with PebbleDB, GCS, and S3 implementations'
+standard: DESC='Blob storage server with BadgerDB, GCS, and S3 implementations'
 standard: build
 
 omnibus: IMGVERS=omnibus
