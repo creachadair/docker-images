@@ -2,7 +2,7 @@
 DATAVOL ?= blobd-data
 NETWORK ?= 127.0.0.1
 CNAME   ?= blobd
-STORES  ?= badger,gcs,s3
+STORES  ?= file,memory
 PROXY   ?= $(GOPROXY)
 DESC    ?= "Blob storage server"
 
@@ -38,11 +38,11 @@ push-images: images
 	done
 
 minimal: IMGVERS=minimal
-minimal: STORES=file,memory
 minimal: DESC='Blob storage server with minimal baseline file and in-memory implementations'
 minimal: build
 
 standard: IMGVERS=standard
+standard: STORES=badger,gcs,s3,tailscale
 standard: DESC='Blob storage server with BadgerDB, GCS, and S3 implementations'
 standard: build
 
