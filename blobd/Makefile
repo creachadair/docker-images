@@ -37,6 +37,11 @@ push-images: images
 	   docker image push "$(IMGNAME):$$vs" ; \
 	done
 
+clean-images:
+	@for vs in omnibus standard minimal ; do \
+	  docker image rm -f "$(IMGNAME):$$vs" 2>/dev/null ; \
+	done
+
 minimal: IMGVERS=minimal
 minimal: DESC='Blob storage server with minimal baseline file and in-memory implementations'
 minimal: build
