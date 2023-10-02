@@ -53,6 +53,7 @@ omnibus: build
 
 # Start a container running blobd with the given settings.
 # The service is exported to the host under the same port.
+start: IMGVERS=standard
 start:
 	docker run --detach --volume $(DATAVOL):/data \
 		--name $(CNAME) \
