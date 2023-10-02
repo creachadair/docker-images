@@ -1,7 +1,11 @@
-FROM golang:1.21-alpine AS build
-ARG PROXY TAGS
+FROM golang:1.21-alpine AS base
 RUN apk add build-base git
-RUN GOPROXY=${PROXY} go install -tags ${TAGS} github.com/creachadair/ffstools/blobd@latest
+RUN git clone https://github.com/creachadair/ffstools
+
+FROM base AS build
+ARG PROXY TAGS
+RUN cd ffstools && \
+    GOPROXY=${PROXY} go install -tags ${TAGS} github.com/creachadair/ffstools/blobd
 
 FROM alpine:latest AS run
 ARG DESC
