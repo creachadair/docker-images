@@ -1,21 +1,21 @@
 # These settings control the image built by "make build".
-DATAVOL ?= blobd-data
+DATAVOL ?= ffs-storage-data
 NETWORK ?= 127.0.0.1
-CNAME   ?= blobd
+CNAME   ?= ffs-storage
 STORES  ?= file,memory
 PROXY   ?= $(GOPROXY)
-DESC    ?= "Blob storage server"
+DESC    ?= "FFS storage server"
 
 # These settings control the container started by "make start".
 STORE   ?= badger:data.db
 PORT    ?= 19741
 
-IMGNAME := ghcr.io/creachadair/blobd
+IMGNAME := ghcr.io/creachadair/ffs
 IMGVERS := latest
 
 .PHONY: build images minimal omnibus standard start stop
 
-# Build an image containing the blobd binary.
+# Build an image containing the ffs binary.
 build:
 	docker buildx build -t $(IMGNAME):$(IMGVERS) \
 	  --build-arg TAGS=$(STORES) \
@@ -43,20 +43,20 @@ clean-images:
 	done
 
 minimal: IMGVERS=minimal
-minimal: DESC='Blob storage server with minimal baseline file and in-memory implementations'
+minimal: DESC='FFS tool with baseline file and in-memory implementations'
 minimal: build
 
 standard: IMGVERS=standard
-standard: STORES=badger,gcs,s3,tailscale
-standard: DESC='Blob storage server with BadgerDB, GCS, and S3 implementations'
+standard: STORES=badger,gcs,s3
+standard: DESC='FFS tool with BadgerDB, GCS, and S3 implementations'
 standard: build
 
 omnibus: IMGVERS=omnibus
 omnibus: STORES=all
-omnibus: DESC='Blob storage server with all supported storage implementations'
+omnibus: DESC='FFS tool with all supported storage implementations'
 omnibus: build
 
-# Start a container running blobd with the given settings.
+# Start a container running ffs storage with the given settings.
 # The service is exported to the host under the same port.
 start: IMGVERS=standard
 start:
@@ -64,7 +64,7 @@ start:
 		--name $(CNAME) \
 		--publish $(NETWORK):$(PORT):$(PORT) \
 		$(IMGNAME):$(IMGVERS) \
-		-store $(STORE) -listen :$(PORT)
+		storage --store $(STORE) --listen :$(PORT)
 
 stop:
 	docker stop $(CNAME) && docker rm $(CNAME)
