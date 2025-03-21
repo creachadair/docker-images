@@ -47,8 +47,8 @@ minimal: DESC='FFS tool with baseline file and in-memory implementations'
 minimal: build
 
 standard: IMGVERS=standard
-standard: STORES=badger,gcs,s3
-standard: DESC='FFS tool with BadgerDB, GCS, and S3 implementations'
+standard: STORES=badger,buntdb,gcs,s3
+standard: DESC='FFS tool with BadgerDB, BuntDB, GCS, and S3 implementations'
 standard: build
 
 omnibus: IMGVERS=omnibus
