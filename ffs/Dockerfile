@@ -1,4 +1,4 @@
-FROM golang:1.25-alpine AS build
+FROM golang:1.26-alpine AS build
 ARG PROXY TAGS
 RUN apk add build-base git
 RUN GOPROXY=${PROXY} go install -tags ${TAGS} github.com/creachadair/ffstools/ffs@latest
