@@ -8,7 +8,7 @@ DESC    ?= "FFS storage server"
 
 # These settings control the container started by "make start".
 STORE   ?= badger:data.db
-PORT    ?= 19741
+PORT    ?= 59953
 
 IMGNAME := ghcr.io/creachadair/ffs
 IMGVERS := latest
